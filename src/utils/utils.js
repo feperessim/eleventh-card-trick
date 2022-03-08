@@ -1,7 +1,7 @@
 const suits = ["spades", "clubs", "diamonds", "hearts"];
 const numbers = ["A", "2", "3", "4", "5", "6",  "7", "8", "9",  "10", "J", "Q", "K"];
-const NUMBER_OF_CARDS = 21
-
+const NUMBER_OF_CARDS = 21;
+const NUMBER_OF_CARDS_PER_ROW = 7;
 
 function buildDeck() {
     return suits.flatMap((suit) => {
@@ -19,5 +19,10 @@ function shuffleDeck(array) {
 }
 
 const cards = shuffleDeck (buildDeck()).slice(0, NUMBER_OF_CARDS);
+const cardsRows =[
+    cards.slice(0, NUMBER_OF_CARDS_PER_ROW),
+    cards.slice(NUMBER_OF_CARDS_PER_ROW, 2*NUMBER_OF_CARDS_PER_ROW),
+    cards.slice(2* NUMBER_OF_CARDS_PER_ROW, 3*NUMBER_OF_CARDS_PER_ROW)
+];
 
-export { cards };
+export { cardsRows };

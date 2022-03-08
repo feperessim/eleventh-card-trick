@@ -1,7 +1,7 @@
-import { cards } from '../utils/utils';
+import { cardsRows } from '../utils/utils';
 
-const Deck = () => {
-    return cards.map((card) => {
+const DeckRow = (props) => {
+    return props.cards.map((card) => {
 	return (
 	    <div className="card">
 	      <span className={card.suit}></span>
@@ -11,4 +11,17 @@ const Deck = () => {
     });
 }
 
+const Deck = () => {
+    return cardsRows.map((cards) => {
+	return (
+	    <div className="display-cards">
+	      <DeckRow cards={ cards } />
+	    </div>
+	);
+    });
+}
+
 export default Deck
+
+
+
