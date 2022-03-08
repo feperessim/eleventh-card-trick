@@ -20,4 +20,4 @@ function shuffleDeck(array) {
 
 const cards = shuffleDeck (buildDeck()).slice(0, NUMBER_OF_CARDS);
 
-export { cards, shuffleDeck };
+export { cards };
