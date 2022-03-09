@@ -1,5 +1,5 @@
 import './App.css';
-import Deck from './components/Deck'
+import { Deck } from './components/Deck'
 
 function App() {
     return (
@@ -8,7 +8,7 @@ function App() {
 	    <Deck />
 	  </div>
 	</>
-  );
+    );
 }
 
 export default App;

@@ -25,4 +25,4 @@ const cardsRows =[
     cards.slice(2* NUMBER_OF_CARDS_PER_ROW, 3*NUMBER_OF_CARDS_PER_ROW)
 ];
 
-export { cardsRows };
+export { cardsRows, NUMBER_OF_CARDS };
