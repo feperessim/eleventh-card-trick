@@ -6,15 +6,15 @@ function buildDeck(suits, numbers) {
     })
 }
 
-function shuffleDeck(array) {
-  return array
-    .map((card) => ({ card, value: Math.random() }))
-    .sort((a, b) => a.value - b.value)
-    .map((obj) => obj.card);
+function shuffleDeck(deck) {
+    return deck
+	.map((card) => ({ card, value: Math.random() }))
+	.sort((a, b) => a.value - b.value)
+	.map((obj) => obj.card);
 }
 
-function buildRandomDeck(suits, numbers, number_of_cards) {
-    return shuffleDeck(buildDeck(suits, numbers)).slice(0, number_of_cards);
+function buildRandomDeck(suits, numbers, numberOfCards) {
+    return shuffleDeck(buildDeck(suits, numbers)).slice(0, numberOfCards);
 }
 
 export { buildRandomDeck };
