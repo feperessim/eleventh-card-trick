@@ -13,4 +13,18 @@ function shuffleDeck(deck) {
 	.map((obj) => obj.card);
 }
 
-export { buildDeck, shuffleDeck };
+const sliceDeck = (deck, numberOfDecks, numberOfCardsPerDeck ) => {
+    const  cardsRows = [ ];
+    
+    for (let i = 0; i < numberOfDecks; i++) {
+	cardsRows.push(
+	    deck.slice(
+		i * numberOfCardsPerDeck ,
+		(i + 1) * numberOfCardsPerDeck
+	    )
+	);
+    };
+    return cardsRows;
+}
+
+export { buildDeck, shuffleDeck, sliceDeck };

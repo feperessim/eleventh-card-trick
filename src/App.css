@@ -67,3 +67,11 @@
   flex-wrap: wrap;
   align-items: center;
 }
+
+.display-choosen-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin:auto;
+  padding-top: 50px;
+}

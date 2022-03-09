@@ -1,10 +1,16 @@
 import './App.css';
 import { Deck } from './components/Deck'
 
-function App({cardsRows, numberOfCards }) {
+function App({suits, numbers, numberOfCards, numberOfCardsPerRow, numberOfRows }) {
     return (
 	<div className="display-cards">
-	  <Deck cardsRows={ cardsRows } numberOfCards={numberOfCards}/>
+	  <Deck
+	      suits={ suits }
+	      numbers={ numbers }
+	      numberOfCards={ numberOfCards }
+	      numberOfCardsPerRow={ numberOfCardsPerRow }
+	      numberOfRows={ numberOfRows }
+	  />
 	</div>
     );
 }

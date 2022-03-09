@@ -55,7 +55,7 @@ const deckAfter = [
 const row = 2;
 const NUMBER_OF_CARDS = 21;
 
-describe("DeckTrick", () => {
+describe("EleventhCardTrickSingleStep", () => {
     it("simulates the 11th card trick on an array of three arrays", () => {
  	expect(EleventhCardTrickSingleStep(deck, row, NUMBER_OF_CARDS)).toEqual(deckAfter);
     });

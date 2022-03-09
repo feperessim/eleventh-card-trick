@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { buildDeck, shuffleDeck, sliceDeck } from '../deck/Deck';
 
 const DeckRow = ({ cards }) => {
     return cards.map((card) => {
@@ -11,15 +12,33 @@ const DeckRow = ({ cards }) => {
     });
 }
 
-
-const Deck = ({ cardsRows, numberOfCards }) => {
-    const [deck, setDeck] = useState(cardsRows);
+const Deck = ({ suits, numbers, numberOfCards, numberOfCardsPerRow, numberOfRows }) => {
+    const [round, setRound] = useState(0);
+    const [deck, setDeck] = useState(
+	createShuffleAndSliceDeck(
+	    suits,
+	    numbers,
+	    numberOfCards,
+	    numberOfRows,
+	    numberOfCardsPerRow));
 
     const handleChooseCardRow = (row) => {
-	setDeck(EleventhCardTrickSingleStep(deck, row, numberOfCards));
+	round < 3 && (setRound(round + 1) || setDeck(EleventhCardTrickSingleStep(deck, row, numberOfCards)));
     }
-    
-    return deck.map((cards, index) => {
+
+    const handleResetButton = () => {
+	setRound(0);
+	setDeck(
+	    createShuffleAndSliceDeck(
+		suits,
+		numbers,
+		numberOfCards,
+		numberOfRows,
+		numberOfCardsPerRow)
+	);
+    }
+
+    const cardsRowsToRender = deck.map((cards, index) => {
 	return (
 	    <div className="display-cards-row">
 	      <div >
@@ -34,6 +53,17 @@ const Deck = ({ cardsRows, numberOfCards }) => {
 	    </div>
 	);
     });
+    
+    round === 3 && cardsRowsToRender.push(
+	<div className="display-choosen-card">
+	  <h2>{"Chosen card is: "} </h2>
+	  <div className="display-choosen-card-with-button">
+	    <DeckRow cards={ [deck[1][3]] } />
+	    <button onClick= { handleResetButton } className="button">Reset</button>
+	  </div>
+	</div>
+    );
+    return cardsRowsToRender;
 }
 
 const EleventhCardTrickSingleStep = (deck, row, numberOfCards) =>{
@@ -50,6 +80,14 @@ const EleventhCardTrickSingleStep = (deck, row, numberOfCards) =>{
 	cardsRows[2].push(arr[index+2]);
     }
     return cardsRows; 
+}
+
+const createShuffleAndSliceDeck = (suits, numbers, numberOfCards, numberOfRows, numberOfCardsPerRow) => {
+    return sliceDeck(
+	shuffleDeck(
+	    buildDeck(suits, numbers)).slice(0, numberOfCards),
+	   numberOfRows,
+	   numberOfCardsPerRow);
 }
 
 export { Deck, EleventhCardTrickSingleStep };
