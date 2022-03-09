@@ -1,7 +1,5 @@
-import { cards } from '../utils/utils';
-
-const Deck = () => {
-    return cards.map((card) => {
+const Deck = (props) => {
+    return props.cards.map((card) => {
 	return (
 	    <div className="card">
 	      <span className={card.suit}></span>

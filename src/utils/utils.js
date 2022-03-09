@@ -1,9 +1,4 @@
-const suits = ["spades", "clubs", "diamonds", "hearts"];
-const numbers = ["A", "2", "3", "4", "5", "6",  "7", "8", "9",  "10", "J", "Q", "K"];
-const NUMBER_OF_CARDS = 21
-
-
-function buildDeck() {
+function buildDeck(suits, numbers) {
     return suits.flatMap((suit) => {
 	return numbers.map((number) => {
 	    return {suit: suit, number: number}
@@ -18,6 +13,8 @@ function shuffleDeck(array) {
     .map((obj) => obj.card);
 }
 
-const cards = shuffleDeck (buildDeck()).slice(0, NUMBER_OF_CARDS);
+function buildRandomDeck(suits, numbers, number_of_cards) {
+    return shuffleDeck(buildDeck(suits, numbers)).slice(0, number_of_cards);
+}
 
-export { cards };
+export { buildRandomDeck };
