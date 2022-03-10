@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { buildDeck, shuffleDeck } from './deck/DeckUtils';
+import { buildDeck, shuffleDeck } from './deck/Deck';
 
 const suits = ["spades", "clubs", "diamonds", "hearts"];
 const numbers = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
