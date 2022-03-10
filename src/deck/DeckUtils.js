@@ -13,8 +13,4 @@ function shuffleDeck(deck) {
 	.map((obj) => obj.card);
 }
 
-function buildRandomDeck(suits, numbers, numberOfCards) {
-    return shuffleDeck(buildDeck(suits, numbers)).slice(0, numberOfCards);
-}
-
-export { buildRandomDeck };
+export { buildDeck, shuffleDeck };
