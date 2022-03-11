@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { buildDeck, shuffleDeck, sliceDeck } from '../deck/Deck';
 
+const INITIAL_ROUND = 0
+
 const DeckRow = ({ cards }) => {
     return cards.map((card) => {
 	return (
@@ -13,9 +15,9 @@ const DeckRow = ({ cards }) => {
 }
 
 const Deck = ({ suits, numbers, numberOfCards, numberOfCardsPerRow, numberOfRows }) => {
-    const [round, setRound] = useState(0);
+    const [round, setRound] = useState(INITIAL_ROUND);
     const [deck, setDeck] = useState(
-	createShuffleAndSliceDeck(
+	CreateShuffleAndSliceDeck(
 	    suits,
 	    numbers,
 	    numberOfCards,
@@ -27,9 +29,9 @@ const Deck = ({ suits, numbers, numberOfCards, numberOfCardsPerRow, numberOfRows
     }
 
     const handleResetButton = () => {
-	setRound(0);
+	setRound(INITIAL_ROUND);
 	setDeck(
-	    createShuffleAndSliceDeck(
+	    CreateShuffleAndSliceDeck(
 		suits,
 		numbers,
 		numberOfCards,
@@ -53,27 +55,36 @@ const Deck = ({ suits, numbers, numberOfCards, numberOfCardsPerRow, numberOfRows
 	    </div>
 	);
     });
-    
-    round === 3 && cardsRowsToRender.push(
-	<div className="display-choosen-card">
-	  <h2>{"Chosen card is: "} </h2>
-	  <div className="display-choosen-card-with-button">
-	    <DeckRow cards={ [deck[1][3]] } />
-	    <button onClick= { handleResetButton } className="button">Reset</button>
+
+    return (
+	<>
+	  { cardsRowsToRender }
+	  {round === 3 && (
+	  <div className="display-choosen-card">
+	    <h2>{"Chosen card is: "} </h2>
+	    <div className="display-choosen-card-with-button">
+	      <DeckRow cards={ [deck[1][3]] } />
+	      <button onClick= { handleResetButton } className="button">Reset</button>
+	    </div>
 	  </div>
-	</div>
+	  )}
+	</>
     );
-    return cardsRowsToRender;
 }
 
-const EleventhCardTrickSingleStep = (deck, row, numberOfCards) =>{
+const ReorderDeck = (deck, row) => {
     const deckCopy = [...deck];
     const middleRow = deckCopy.splice(row, 1)[0];
     const lastRow = deckCopy.pop();
     const firstRow = deckCopy.pop();
-    const arr = [...firstRow, ...middleRow, ...lastRow];
-    const cardsRows = [[],[],[]]
 
+    return  [...firstRow, ...middleRow, ...lastRow];
+}
+
+const EleventhCardTrickSingleStep = (deck, row, numberOfCards) =>{
+    const cardsRows = [[],[],[]]
+    const arr =ReorderDeck(deck, row);
+	
     for (let index = 0; index < numberOfCards; index += 3) {
 	cardsRows[0].push(arr[index]);
 	cardsRows[1].push(arr[index+1]);
@@ -82,7 +93,7 @@ const EleventhCardTrickSingleStep = (deck, row, numberOfCards) =>{
     return cardsRows; 
 }
 
-const createShuffleAndSliceDeck = (suits, numbers, numberOfCards, numberOfRows, numberOfCardsPerRow) => {
+const CreateShuffleAndSliceDeck = (suits, numbers, numberOfCards, numberOfRows, numberOfCardsPerRow) => {
     return sliceDeck(
 	shuffleDeck(
 	    buildDeck(suits, numbers)).slice(0, numberOfCards),

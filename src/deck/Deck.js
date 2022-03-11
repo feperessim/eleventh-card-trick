@@ -14,17 +14,12 @@ function shuffleDeck(deck) {
 }
 
 const sliceDeck = (deck, numberOfDecks, numberOfCardsPerDeck ) => {
-    const  cardsRows = [ ];
-    
-    for (let i = 0; i < numberOfDecks; i++) {
-	cardsRows.push(
-	    deck.slice(
-		i * numberOfCardsPerDeck ,
-		(i + 1) * numberOfCardsPerDeck
-	    )
-	);
-    };
-    return cardsRows;
+    return Array(numberOfDecks).fill().map((value, index) =>  {
+	return deck.slice(
+	    index * numberOfCardsPerDeck ,
+	    (index + 1) * numberOfCardsPerDeck
+	)
+    })
 }
 
 export { buildDeck, shuffleDeck, sliceDeck };
