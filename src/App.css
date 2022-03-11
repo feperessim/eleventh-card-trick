@@ -41,3 +41,29 @@
   content: "\2663";
   font-size: 50px;
 }
+
+.button {
+  min-width: 120px;
+  height: 35px;
+  padding: 0 15px;
+  margin: 10px 30px;
+  background-color: transparent;
+  border-style: solid;
+  border-radius: 8px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.2s;
+  border-color: black;
+}
+
+.button:hover {
+  background-color: #c7ffed;
+}
+
+.display-cards-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}

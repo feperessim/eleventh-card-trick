@@ -25,7 +25,7 @@ console.log(cardsRows);
 
 ReactDOM.render(
     <React.StrictMode>
-      <App cardsRows={ cardsRows } />
+      <App cardsRows={ cardsRows } numberOfCards={ NUMBER_OF_CARDS }  />
     </React.StrictMode>,
     document.getElementById('root')
 );
