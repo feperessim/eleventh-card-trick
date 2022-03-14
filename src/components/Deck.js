@@ -15,29 +15,25 @@ const DeckRow = ({ cards }) => {
 }
 
 const Deck = ({ suits, numbers, numberOfCards, numberOfCardsPerRow, numberOfRows }) => {
+    const initDeck = () => CreateShuffleAndSliceDeck(
+	suits,
+	numbers,
+	numberOfCards,
+	numberOfRows,
+	numberOfCardsPerRow
+    );
     const [round, setRound] = useState(INITIAL_ROUND);
-    const [deck, setDeck] = useState(
-	CreateShuffleAndSliceDeck(
-	    suits,
-	    numbers,
-	    numberOfCards,
-	    numberOfRows,
-	    numberOfCardsPerRow));
+    const [deck, setDeck] = useState(initDeck());
 
     const handleChooseCardRow = (row) => {
-	round < 3 && (setRound(round + 1) || setDeck(EleventhCardTrickSingleStep(deck, row, numberOfCards)));
+	if (round >= 3) return;
+	setRound(round + 1);
+	setDeck(EleventhCardTrickSingleStep(deck, row, numberOfCards));
     }
 
     const handleResetButton = () => {
 	setRound(INITIAL_ROUND);
-	setDeck(
-	    CreateShuffleAndSliceDeck(
-		suits,
-		numbers,
-		numberOfCards,
-		numberOfRows,
-		numberOfCardsPerRow)
-	);
+	setDeck(initDeck());
     }
 
     const cardsRowsToRender = deck.map((cards, index) => {
@@ -60,13 +56,13 @@ const Deck = ({ suits, numbers, numberOfCards, numberOfCardsPerRow, numberOfRows
 	<>
 	  { cardsRowsToRender }
 	  {round === 3 && (
-	  <div className="display-choosen-card">
-	    <h2>{"Chosen card is: "} </h2>
-	    <div className="display-choosen-card-with-button">
-	      <DeckRow cards={ [deck[1][3]] } />
-	      <button onClick= { handleResetButton } className="button">Reset</button>
-	    </div>
-	  </div>
+	      <div className="display-choosen-card">
+		<h2>{"Chosen card is: "} </h2>
+		<div className="display-choosen-card-with-button">
+		  <DeckRow cards={ [deck[1][3]] } />
+		  <button onClick= { handleResetButton } className="button">Reset</button>
+		</div>
+	      </div>
 	  )}
 	</>
     );
@@ -84,7 +80,7 @@ const ReorderDeck = (deck, row) => {
 const EleventhCardTrickSingleStep = (deck, row, numberOfCards) =>{
     const cardsRows = [[],[],[]]
     const arr =ReorderDeck(deck, row);
-	
+    
     for (let index = 0; index < numberOfCards; index += 3) {
 	cardsRows[0].push(arr[index]);
 	cardsRows[1].push(arr[index+1]);
@@ -97,8 +93,8 @@ const CreateShuffleAndSliceDeck = (suits, numbers, numberOfCards, numberOfRows, 
     return sliceDeck(
 	shuffleDeck(
 	    buildDeck(suits, numbers)).slice(0, numberOfCards),
-	   numberOfRows,
-	   numberOfCardsPerRow);
+	numberOfRows,
+	numberOfCardsPerRow);
 }
 
 export { Deck, EleventhCardTrickSingleStep };
