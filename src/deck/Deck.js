@@ -13,4 +13,13 @@ function shuffleDeck(deck) {
 	.map((obj) => obj.card);
 }
 
-export { buildDeck, shuffleDeck };
+const sliceDeck = (deck, numberOfDecks, numberOfCardsPerDeck ) => {
+    return Array(numberOfDecks).fill().map((value, index) =>  {
+	return deck.slice(
+	    index * numberOfCardsPerDeck ,
+	    (index + 1) * numberOfCardsPerDeck
+	)
+    })
+}
+
+export { buildDeck, shuffleDeck, sliceDeck };
